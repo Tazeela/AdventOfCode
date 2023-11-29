@@ -15,12 +15,12 @@ public class SupplyStacks : AdventSolver {
       Console.WriteLine("Solution for part 2 is: " + SortStacks(filename, int.MaxValue));
    }
 
-/// <summary>
-/// Bulk of the work, does the stack sorting and returns a string with the top item in each stack.
-/// </summary>
-/// <param name="filename">The file to load the game from.</param>
-/// <param name="craneLoadSize">The number of items the crane can move at once</param>
-/// <returns>A string that represents the top item in each stack after all operations.</returns>
+   /// <summary>
+   /// Bulk of the work, does the stack sorting and returns a string with the top item in each stack.
+   /// </summary>
+   /// <param name="filename">The file to load the game from.</param>
+   /// <param name="craneLoadSize">The number of items the crane can move at once</param>
+   /// <returns>A string that represents the top item in each stack after all operations.</returns>
    private string SortStacks(string filename, int craneLoadSize) {
       Dictionary<int, LinkedList<char>> stacks = new Dictionary<int, LinkedList<char>>();
 
