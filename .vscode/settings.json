@@ -1,0 +1,4 @@
+{
+    "dotnet.defaultSolution": "AdventRunner.sln",
+    "omnisharp.enableEditorConfigSupport": true
+}
