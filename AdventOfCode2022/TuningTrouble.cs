@@ -10,7 +10,7 @@ public class TuningTrouble : AdventSolver {
    public override string Day => "day6";
 
    public override void Solve(string filename) {
-      foreach(string game in ReadLines(filename)) {
+      foreach (string game in ReadLines(filename)) {
          Console.WriteLine("Solution for part 1 is: " + FindFirstMarker(game, 4));
          Console.WriteLine("Solution for part 2 is: " + FindFirstMarker(game, 14));
       }
@@ -18,12 +18,14 @@ public class TuningTrouble : AdventSolver {
 
    /// <summary>
    /// Finds the first marker in the data stream where the last numPackets have all been distinct.
+   /// The general approach here is to scan backwords once from each packet, when we find a duplicate then 
+   /// note its index so the min index is tracked
    /// </summary>
-   /// <param name="input"></param>
-   /// <param name="numPackets"></param>
-   /// <returns></returns>
+   /// <param name="input">The input text to parse.</param>
+   /// <param name="numPackets">The number of distinct packets required.</param>
+   /// <returns>The index of the position after the first group of numPackets distinct unique items.</returns>
    private static int FindFirstMarker(string input, int numPackets) {
-      int minSolution = numPackets - 1;
+      int minSolution = numPackets - 1; // -1 because its 0 indexed
       for (int x = 1; x < input.Length; x++) {
          // Scan back through up to num packets to look for duplicates
          for (int y = 1; y < numPackets; y++) {
