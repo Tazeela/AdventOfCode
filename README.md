@@ -7,4 +7,4 @@ Contains solutions for:
 # Running a solver
 
 To run use 
-> dotnet run \[day1\] \[input.txt\]
+> dotnet run --project AdventOfCode2022 \[day1\] \[input.txt\]
