@@ -11,7 +11,7 @@ public class RockPaperScissors : AdventSolver {
    public override void Solve(string filename) {
       int sum1 = 0;
       int sum2 = 0;
-      foreach (String game in ReadLines(filename)) {
+      foreach (string game in ReadLines(filename)) {
          sum1 += DetermineScorePart1(game[0], game[2]);
          sum2 += DetermineScorePart2(game[0], game[2]);
       }

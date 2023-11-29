@@ -25,5 +25,8 @@
     <None Remove="data\day3\sample.txt" />
     <None Remove="data\day4\input.txt" />
     <None Remove="data\day4\sample.txt" />
+    <None Remove="data\day5\input.txt" />
+    <None Remove="data\day5\sample.txt" />
+    <None Remove="data\day5\test.txt" />
   </ItemGroup>
 </Project>

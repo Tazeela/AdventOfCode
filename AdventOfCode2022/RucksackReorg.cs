@@ -83,7 +83,7 @@ public class RucksackReorg : AdventSolver {
          result = itemVal - 38;
       }
 
-      Debug.WriteLine(String.Format("Converted {0} to {1}", item, result));
+      Debug.WriteLine(string.Format("Converted {0} to {1}", item, result));
       return result;
    }
 }

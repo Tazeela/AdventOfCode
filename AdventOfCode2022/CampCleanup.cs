@@ -11,7 +11,7 @@ public class CampCleanup : AdventSolver {
    public override void Solve(string filename) {
       int count1 = 0;
       int count2 = 0;
-      foreach (String pairing in ReadLines(filename)) {
+      foreach (string pairing in ReadLines(filename)) {
          int[] parts = pairing.Split(new char[] { '-', ',' }).Select(str => int.Parse(str)).ToArray();
 
          if (CheckIfOverlapEntirely(parts[0], parts[1], parts[2], parts[3])) {

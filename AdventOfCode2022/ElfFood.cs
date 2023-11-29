@@ -17,7 +17,7 @@ public class ElfFood : AdventSolver {
       PriorityQueue<int, int> priorityQueue = new(limit + 1);
 
       foreach (string text in base.ReadLines(filename)) {
-         if (String.IsNullOrEmpty(text)) {
+         if (string.IsNullOrEmpty(text)) {
             EnqueueIfRoom(priorityQueue, current, limit);
             current = 0;
          } else {

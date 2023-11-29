@@ -31,7 +31,15 @@
          "\tpublic override string Day => \"day$2\";",
          "",
          "\tpublic override void Solve(string filename) {",
-         "\t\t$0",
+         "\t\tint count1 = 0;",
+         "\t\tint count2 = 0;",
+         "",
+         "\t\tforeach (String game in ReadLines(filename)) {"
+         "\t\t\t$0",
+         "\t\t}",
+         "",
+         "\t\t Console.WriteLine(\"Solution for part 1 is: \" + count1);",
+         "\t\t Console.WriteLine(\"Solution for part 2 is: \" + count2);",
          "\t}",
          "}"
       ]

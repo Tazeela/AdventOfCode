@@ -28,6 +28,7 @@ public static class AdventRunner {
             Console.WriteLine(String.Format("* Available days: {0}", String.Join(',', string.Join(',', solversMap.Keys))));
          }
       } else {
+         // TODO: Check file exists?
          var solver = solversMap[args[1]];
          Stopwatch sw = Stopwatch.StartNew();
          solver.Solve(args[2]);
