@@ -25,8 +25,8 @@ public class Day1 : AdventSolver {
         int count2 = 0;
 
         foreach (string game in ReadLines(filename)) {
-            count1 += calculateCalibrationValue(game, false);
-            count2 += calculateCalibrationValue(game, true);
+            count1 += CalculateCalibrationValue(game, false);
+            count2 += CalculateCalibrationValue(game, true);
         }
 
         Console.WriteLine("Solution for part 1 is: " + count1);
@@ -36,29 +36,63 @@ public class Day1 : AdventSolver {
     /// <summary>
     /// Calculate the calibration value using the first and last digit in the line.
     /// Edge cases to consider - 
-    ///   eightwo
-    ///   xxx1xxx
+    ///   eightwo = 82
+    ///   xxx1xxx = 11
     /// </summary>
     /// <param name="line">The line to parse the calibration from.</param>
     /// <param name="allowSpelled">True if we should include spelled out digits 1-9, false if not.</param>
     /// <returns>The first and last digit, merged into the calibration value.</returns>
-    public static int calculateCalibrationValue(string line, bool allowSpelled) {
+    public static int CalculateCalibrationValue(string line, bool allowSpelled) {
         var results = new List<char>();
+        int first = 0;
+        int last = 0;
 
         for (int x = 0; x < line.Length; x++) {
-            if (char.IsDigit(line[x])) {
-                results.Add(line[x]);
-            } else if (allowSpelled) {
-                string next = line.Substring(x);
-                foreach (var kvp in numberMappings) {
-                    if (next.StartsWith(kvp.Key)) {
-                        results.Add(kvp.Value);
-                        break;
-                    }
-                }
+            first = ParseDigit(line, x, allowSpelled);
+            if (first > 0) break;
+        }
+
+        for (int x = line.Length - 1; x >= 0; x--) {
+            last = ParseDigit(line, x, allowSpelled);
+            if (last > 0) break;
+        }
+
+        return (first * 10) + last;
+    }
+
+    /// <summary>
+    /// Check if the line contains a digit at the offset.
+    /// </summary>
+    /// <param name="line">The full line of text we are checking.</param>
+    /// <param name="offset">The offset in line we are checking.</param>
+    /// <param name="allowSpelled">Flag indicating if we support spelled words or not.</param>
+    /// <returns>The digit at offset in line, otherwise 0 if no digit can be found.</returns>
+    public static int ParseDigit(string line, int offset, bool allowSpelled) {
+        if (char.IsDigit(line[offset])) {
+            return (int)char.GetNumericValue(line[offset]);
+        } else if (allowSpelled) {
+            foreach (var kvp in numberMappings) {
+                if (PartialSubstring(line, kvp.Key, offset)) return kvp.Value;
             }
         }
 
-        return int.Parse(results[0].ToString() + results[results.Count - 1].ToString());
+        return 0;
+    }
+
+    /// <summary>
+    /// Tests if the original string matches searchString at an offset.
+    /// </summary>
+    /// <param name="line">The full line of text we are checking.</param>
+    /// <param name="searchString">The specific string we are searching for.</param>
+    /// <param name="offset">The offset in line we are checking at.</param>
+    /// <returns>True if the string matches, otherwise false.</returns>
+    private static bool PartialSubstring(string line, string searchString, int offset) {
+        if (line.Length < searchString.Length + offset) return false;
+
+        for (int x = 0; x < searchString.Length; x++) {
+            if (line[offset + x] != searchString[x]) return false;
+        }
+
+        return true;
     }
 }
