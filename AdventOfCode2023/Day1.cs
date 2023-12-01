@@ -37,6 +37,7 @@ public class Day1 : AdventSolver {
     /// Calculate the calibration value using the first and last digit in the line.
     /// Edge cases to consider - 
     ///   eightwo
+    ///   xxx1xxx
     /// </summary>
     /// <param name="line">The line to parse the calibration from.</param>
     /// <param name="allowSpelled">True if we should include spelled out digits 1-9, false if not.</param>
