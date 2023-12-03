@@ -27,12 +27,12 @@ public class Day3 : AdventSolver {
 
     /// <summary>
     /// Get all of the part numbers, and the location of the symbol which they are matched to.
-    /// Note that if a part number is connect to multiple symbols then it will be duplicated, its unclear from 
+    /// Note that if a part number is connected to multiple symbols then it will be duplicated, its unclear from 
     /// the problem whether or not this is the correct course, but it never comes up.
     /// </summary>
     /// <param name="data">The data array.</param>
     /// <param name="allowedSymbols">Optional list of allowed symbols, if null allows any non '.'</param>
-    /// <returns>A dictionary that maps the location of the symbol and a list of all connected parts.</returns>
+    /// <returns>A dictionary that maps the location of the symbol and a list of all connected part numbers.</returns>
     private Dictionary<string, List<int>> GetAllPartNumbers(List<string> data, char[]? allowedSymbols) {
         Dictionary<string, List<int>> adjacentValues = [];
         for (int x = 0; x < data.Count; x++) {
@@ -47,6 +47,7 @@ public class Day3 : AdventSolver {
                         adjacentLocations.Add(loc);
                     }
                 } else {
+                    // Otherwise check to see if we need to flush out a location
                     foreach (var loc in adjacentLocations) {
                         if (!adjacentValues.ContainsKey(loc)) adjacentValues.Add(loc, []);
                         adjacentValues[loc].Add(number);
@@ -64,6 +65,9 @@ public class Day3 : AdventSolver {
 
     /// <summary>
     /// Given an x and y coordinate, determine if there is an adjacent symbol, and if there is where to find it.
+    /// From an optimization perspective this could definitely be improved as we check the previous digits in the word, 
+    /// and we duplicate checks for symbols in tiles we already checked. It also continues after finding the first symbol, 
+    /// though only because I expected the problem to care about multiple edges while doing part 1 it never gets used.
     /// </summary>
     /// <param name="data">The data array.</param>
     /// <param name="xCoord">The x coord to test around.</param>
