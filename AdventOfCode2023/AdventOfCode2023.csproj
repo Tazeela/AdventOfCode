@@ -20,5 +20,7 @@
    <ItemGroup>
      <None Remove="data\day2\input.txt" />
      <None Remove="data\day2\sample.txt" />
+     <None Remove="data\day3\input.txt" />
+     <None Remove="data\day3\sample.txt" />
    </ItemGroup>
 </Project>
