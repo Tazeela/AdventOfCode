@@ -18,6 +18,7 @@
    </ItemGroup>
 
    <ItemGroup>
-     <Folder Include="data\day2\" />
+     <None Remove="data\day2\input.txt" />
+     <None Remove="data\day2\sample.txt" />
    </ItemGroup>
 </Project>
