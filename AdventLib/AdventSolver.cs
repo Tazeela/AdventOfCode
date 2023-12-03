@@ -1,4 +1,4 @@
-﻿namespace AdventLib;
+namespace AdventLib;
 using System.Text;
 
 /// <summary>

@@ -1,4 +1,4 @@
-﻿using AdventLib;
+using AdventLib;
 using AdventOfCode2023;
 
 Console.WriteLine("Hello, World 2023!");
