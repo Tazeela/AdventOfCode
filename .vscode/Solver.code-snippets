@@ -34,7 +34,7 @@
          "\t\tint count1 = 0;",
          "\t\tint count2 = 0;",
          "",
-         " \\\\List<string> allData = [.. ReadLines(filename)];",
+         " \t\t//List<string> allData = [.. ReadLines(filename)];",
          "\t\tforeach (String game in ReadLines(filename)) {"
          "\t\t\t$0",
          "\t\t}",
