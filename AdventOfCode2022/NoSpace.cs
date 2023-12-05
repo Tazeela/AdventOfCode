@@ -11,9 +11,6 @@ public class NoSpace : AdventSolver {
     public override string Day => "day7";
 
     public override void Solve(string filename) {
-        int count1 = 0;
-        int count2 = 0;
-
         GraphNode root = new GraphNode("/", null);
         GraphNode current = root;
         foreach (string line in ReadLines(filename)) {
@@ -47,7 +44,7 @@ public class NoSpace : AdventSolver {
         public int Size { get; set; }
         public string Name { get; set; }
 
-        public GraphNode Parent { get; set; }
+        public GraphNode? Parent { get; set; }
 
         public bool IsDirectory {
             get {
@@ -55,7 +52,7 @@ public class NoSpace : AdventSolver {
             }
         }
 
-        public GraphNode(string name, GraphNode parent, int size = 0) {
+        public GraphNode(string name, GraphNode? parent, int size = 0) {
             this.Name = name;
             Parent = parent;
             this.Size = size;
@@ -109,7 +106,6 @@ public class NoSpace : AdventSolver {
                 }
 
                 if (sumTotal >= target) {
-                    Console.WriteLine("Found new ")
                    currentBest = Math.Min(currentBest, sumTotal);
                 }
 
