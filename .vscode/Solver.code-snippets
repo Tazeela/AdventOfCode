@@ -21,6 +21,7 @@
       "prefix": "newsolver",
       "body": [
          "using AdventLib;",
+         "using Microsoft.VisualStudio.TestTools.UnitTesting;",
          "",
          "namespace AdventOfCode${1|2022,2023|};",
          "",
@@ -41,6 +42,15 @@
          "",
          "\t\t Console.WriteLine(\"Solution for part 1 is: \" + count1);",
          "\t\t Console.WriteLine(\"Solution for part 2 is: \" + count2);",
+         "\t}",
+         "",
+         "\t[TestClass]"
+         "\tpublic class ${TM_FILENAME_BASE}Test {",
+         "",
+         "\t\t[TestMethod]"
+         "\t\tpublic void Test1() {",
+         "\t\t}",
+         
          "\t}",
          "}"
       ]

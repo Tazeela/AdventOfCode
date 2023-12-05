@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using AdventLib;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdventOfCode2023;
 
@@ -164,12 +165,12 @@ public class Day5 : AdventSolver {
     /// Represents an inclusive range of numbers
     /// </summary>
     public class Range {
-        public long Start { get; set; }
-        public long End { get; set; }
+        public long Start { get; private set; }
+        public long End { get; private set; }
 
         public Range(long start, long end) {
-            this.Start = start;
-            this.End = end;
+            Start = start;
+            End = end;
         }
 
         public bool OverlapWith(Range other) {
@@ -179,6 +180,43 @@ public class Day5 : AdventSolver {
 
         public override string ToString() {
             return "[" + Start + "..." + End + "]";
+        }
+    }
+
+
+    [TestClass]
+    public class Day5Test {
+
+        [TestMethod]
+        public void RangeModifier_Parse() {
+            var modifier = new RangeModifier("5 10 2");
+            Assert.AreEqual(10, modifier.sourceRange.Start);
+            Assert.AreEqual(11, modifier.sourceRange.End);
+            Assert.AreEqual(-5, modifier.offset);
+        }
+
+        [TestMethod]
+        public void RangeModifier_ApplyOffset() {
+            var modifier = new RangeModifier("5 10 2");
+            var (unprocessed, modified) = modifier.ApplyOffset(new Range(8, 12));
+            Assert.AreEqual(5, modified.Start);
+            Assert.AreEqual(6, modified.End);
+
+            Assert.AreEqual(9, unprocessed.Find(r => r.Start == 8)?.End);
+            Assert.AreEqual(12, unprocessed.Find(r => r.Start == 12)?.End);
+        }
+
+        [TestMethod]
+        public void Range_OverlapWith() {
+            Assert.IsTrue(new Range(0, 100).OverlapWith(new Range(100, 101)));
+            Assert.IsTrue(new Range(0, 100).OverlapWith(new Range(95, 101)));
+            Assert.IsTrue(new Range(0, 100).OverlapWith(new Range(95, 100)));
+            Assert.IsTrue(new Range(99, 100).OverlapWith(new Range(0, 99)));
+            Assert.IsTrue(new Range(99, 100).OverlapWith(new Range(0, 100)));
+            Assert.IsTrue(new Range(99, 100).OverlapWith(new Range(99, 100)));
+
+            Assert.IsFalse(new Range(0, 98).OverlapWith(new Range(99, 100)));
+            Assert.IsFalse(new Range(97, 98).OverlapWith(new Range(99, 100)));
         }
     }
 }
