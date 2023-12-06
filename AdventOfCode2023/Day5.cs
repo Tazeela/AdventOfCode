@@ -11,14 +11,27 @@ public class Day5 : AdventSolver {
     public override string Day => "day5";
 
     public override void Solve(string filename) {
-
         List<string> allData = [.. ReadLines(filename)];
 
-        // This is the collection of all seeds
         long[] seeds = allData[0].Split(":", StringSplitOptions.TrimEntries)[1].Split(" ").Select(long.Parse).ToArray();
 
         // Conversion maps for sourceCategory -> Converter
-        Dictionary<string, CategoryConverter> converters = new Dictionary<string, CategoryConverter>();
+        Dictionary<string, CategoryConverter> converters = ParseConverters(allData);
+
+        Queue<Range> part1Ranges = new Queue<Range>(seeds.Select(s => new Range(s, s)));
+        Console.WriteLine("Solution for part 1 is: " + ConvertToLocation(converters, part1Ranges).Select(r => r.Start).Min());
+
+        Queue<Range> part2Ranges = new Queue<Range>(seeds.Chunk(2).Select(arr => new Range(arr[0], arr[0] + arr[1] - 1)));
+        Console.WriteLine("Solution for part 2 is: " + ConvertToLocation(converters, part2Ranges).Select(r => r.Start).Min());
+    }
+
+    /// <summary>
+    /// Parse all of the converters from the input file.
+    /// </summary>
+    /// <param name="allData">The data file lines.</param>
+    /// <returns>A collection of converters, mapped by the SourceCategory.</returns>
+    private static Dictionary<string, CategoryConverter> ParseConverters(List<string> allData) {
+         Dictionary<string, CategoryConverter> converters = new Dictionary<string, CategoryConverter>();
 
         // Parse all of the conversions
         int line = 2;
@@ -33,12 +46,7 @@ public class Day5 : AdventSolver {
 
             line++; // Skips the empty line
         }
-
-        Queue<Range> part1Ranges = new Queue<Range>(seeds.Select(s => new Range(s, s)));
-        Console.WriteLine("Solution for part 1 is: " + ConvertToLocation(converters, part1Ranges).Select(r => r.Start).Min());
-
-        Queue<Range> part2Ranges = new Queue<Range>(seeds.Chunk(2).Select(arr => new Range(arr[0], arr[0] + arr[1] - 1)));
-        Console.WriteLine("Solution for part 2 is: " + ConvertToLocation(converters, part2Ranges).Select(r => r.Start).Min());
+        return converters;
     }
 
     /// <summary>
@@ -186,6 +194,25 @@ public class Day5 : AdventSolver {
 
     [TestClass]
     public class Day5Test {
+
+        [TestMethod]
+        public void CategoryConverter_Map() {
+            var converter = new CategoryConverter("seed-to-soil map:");
+            converter.conversions.Add(new RangeModifier("50 90 2"));
+            converter.conversions.Add(new RangeModifier("52 50 40"));
+
+            // 50-89 should get offset +2
+            // 90-91 should get -40
+
+            var results = converter.Map(new Queue<Range>(new [] {new Range(85, 95) })).ToArray();
+            Console.WriteLine("Applying " + converter);
+            Console.WriteLine(String.Join(",", results.Select(s => s.ToString())));
+
+            Assert.AreEqual(3, results.Count());
+            Assert.AreEqual(91, results.First(r => r.Start == 87)?.End); // 85-89 should get mapped 87-91
+            Assert.AreEqual(51, results.First(r => r.Start == 50)?.End); // 90-91 should get mapped to 50-51
+            Assert.AreEqual(95, results.First(r => r.Start == 92)?.End); // 92+ has no mapping for this range so its just identity
+        }
 
         [TestMethod]
         public void RangeModifier_Parse() {
