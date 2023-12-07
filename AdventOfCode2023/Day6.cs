@@ -19,7 +19,7 @@ public class Day6 : AdventSolver {
 
         Console.WriteLine(string.Join(",", times));
 
-        for(int x = 0; x < times.Length; x++) {
+        for (int x = 0; x < times.Length; x++) {
             count1 *= CalculateNumberWaysToWin(distances[x], times[x]);
         }
 
@@ -27,23 +27,23 @@ public class Day6 : AdventSolver {
         long distances2 = long.Parse(allData[1].Split(":")[1].Replace(" ", ""));
 
 
-         Console.WriteLine("Solution for part 1 is: " + count1);
-         Console.WriteLine("Solution for part 2 is: " + CalculateNumberWaysToWin(distances2, times2));
+        Console.WriteLine("Solution for part 1 is: " + count1);
+        Console.WriteLine("Solution for part 2 is: " + CalculateNumberWaysToWin(distances2, times2));
     }
 
     public static long CalculateNumberWaysToWin(long requiredDistance, long availableTime) {
         long minTime = 1;
 
-        for(int x = 1; x < availableTime; x++) {
-            if((availableTime - x) * x > requiredDistance) {
+        for (int x = 1; x < availableTime; x++) {
+            if ((availableTime - x) * x > requiredDistance) {
                 minTime = x;
                 break;
             }
         }
-        
+
         long maxTime = minTime;
-        for(long x = availableTime - 1; x > minTime; x--) {
-            if((availableTime - x) * x > requiredDistance) {
+        for (long x = availableTime - 1; x > minTime; x--) {
+            if ((availableTime - x) * x > requiredDistance) {
                 maxTime = x;
                 break;
             }

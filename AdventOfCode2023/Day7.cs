@@ -44,7 +44,7 @@ public class Day7 : AdventSolver {
         int[] counts = [.. cards.Where(c => c != 'X').GroupBy(s => s).Select(s => s.Count()).OrderByDescending(s => s)];
 
         // Special case where all jokers
-        if(numJokers == 5) return 99;
+        if (numJokers == 5) return 99;
 
         return (counts[0] + numJokers) switch {
             5 => 99,

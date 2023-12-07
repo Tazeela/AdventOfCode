@@ -31,7 +31,7 @@ public class Day5 : AdventSolver {
     /// <param name="allData">The data file lines.</param>
     /// <returns>A collection of converters, mapped by the SourceCategory.</returns>
     private static Dictionary<string, CategoryConverter> ParseConverters(List<string> allData) {
-         Dictionary<string, CategoryConverter> converters = new Dictionary<string, CategoryConverter>();
+        Dictionary<string, CategoryConverter> converters = new Dictionary<string, CategoryConverter>();
 
         // Parse all of the conversions
         int line = 2;
@@ -204,7 +204,7 @@ public class Day5 : AdventSolver {
             // 50-89 should get offset +2
             // 90-91 should get -40
 
-            var results = converter.Map(new Queue<Range>(new [] {new Range(85, 95) })).ToArray();
+            var results = converter.Map(new Queue<Range>(new[] { new Range(85, 95) })).ToArray();
             Console.WriteLine("Applying " + converter);
             Console.WriteLine(String.Join(",", results.Select(s => s.ToString())));
 

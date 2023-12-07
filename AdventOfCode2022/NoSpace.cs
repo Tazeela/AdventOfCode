@@ -106,7 +106,7 @@ public class NoSpace : AdventSolver {
                 }
 
                 if (sumTotal >= target) {
-                   currentBest = Math.Min(currentBest, sumTotal);
+                    currentBest = Math.Min(currentBest, sumTotal);
                 }
 
                 return (sumTotal, currentBest);
