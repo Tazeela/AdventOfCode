@@ -1,7 +1,7 @@
 namespace AdventLib;
 
 public static class AggregationUtils {
-    
+
     /// <summary>
     /// Calculate the greatest common denominator between two numbers.
     /// </summary>
@@ -20,12 +20,12 @@ public static class AggregationUtils {
         return a | b;
     }
 
-/// <summary>
-/// Calculate the least common multiple between two numbers.
-/// </summary>
-/// <param name="a">The first num</param>
-/// <param name="b">The second num</param>
-/// <returns>The least common multiple.</returns>
+    /// <summary>
+    /// Calculate the least common multiple between two numbers.
+    /// </summary>
+    /// <param name="a">The first num</param>
+    /// <param name="b">The second num</param>
+    /// <returns>The least common multiple.</returns>
     public static long Lcm(long a, long b) {
         return a * b / Gcd(a, b);
     }
