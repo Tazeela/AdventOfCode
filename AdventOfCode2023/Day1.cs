@@ -72,27 +72,12 @@ public class Day1 : AdventSolver {
             return (int)char.GetNumericValue(line[offset]);
         } else if (allowSpelled) {
             foreach (var kvp in numberMappings) {
-                if (PartialSubstring(line, kvp.Key, offset)) return kvp.Value;
+                if (StringUtils.IsPartialSubstring(line, kvp.Key, offset)) return kvp.Value;
             }
         }
 
         return 0;
     }
 
-    /// <summary>
-    /// Tests if the original string matches searchString at an offset.
-    /// </summary>
-    /// <param name="line">The full line of text we are checking.</param>
-    /// <param name="searchString">The specific string we are searching for.</param>
-    /// <param name="offset">The offset in line we are checking at.</param>
-    /// <returns>True if the string matches, otherwise false.</returns>
-    private static bool PartialSubstring(string line, string searchString, int offset) {
-        if (line.Length < searchString.Length + offset) return false;
-
-        for (int x = 0; x < searchString.Length; x++) {
-            if (line[offset + x] != searchString[x]) return false;
-        }
-
-        return true;
-    }
+    
 }

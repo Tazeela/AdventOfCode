@@ -1,7 +1,6 @@
 namespace AdventLib;
 
-public static class AggregationUtils {
-
+public static class MathUtils {
     /// <summary>
     /// Calculate the greatest common denominator between two numbers.
     /// </summary>
@@ -28,17 +27,6 @@ public static class AggregationUtils {
     /// <returns>The least common multiple.</returns>
     public static long Lcm(long a, long b) {
         return a * b / Gcd(a, b);
-    }
-
-    /// <summary>
-    /// Calculate the LCM 
-    /// </summary>
-    /// <param name="numbers">An enumerable of numbers.</param>
-    /// <returns>The least common denominator among all numbers.</returns>
-    public static long Lcm(IEnumerable<long> numbers) {
-        return numbers
-            .Skip(1)
-            .Aggregate(numbers.First(), Lcm);
     }
 
 }

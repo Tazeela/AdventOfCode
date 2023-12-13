@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using AdventLib;
+using Range = AdventLib.Common.Range;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AdventOfCode2023;
@@ -169,29 +170,7 @@ public class Day5 : AdventSolver {
         }
     }
 
-    /// <summary>
-    /// Represents an inclusive range of numbers
-    /// </summary>
-    public class Range {
-        public long Start { get; private set; }
-        public long End { get; private set; }
-
-        public Range(long start, long end) {
-            Start = start;
-            End = end;
-        }
-
-        public bool OverlapWith(Range other) {
-            return !(other.Start > End || other.End < Start);
-        }
-
-
-        public override string ToString() {
-            return "[" + Start + "..." + End + "]";
-        }
-    }
-
-
+    
     [TestClass]
     public class Day5Test {
 

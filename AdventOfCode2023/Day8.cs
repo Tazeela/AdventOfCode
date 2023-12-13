@@ -10,7 +10,7 @@ public class Day8 : AdventSolver {
     public override string Day => "day8";
 
     public override void Solve(string filename) {
-        Solver solver = new Solver([.. ReadLines(filename)]);
+        Solver solver = new([.. ReadLines(filename)]);
         Console.WriteLine("Solution for part 1 is: " + solver.GetNumSteps("AAA", (s) => s == "ZZZ"));
         
 
@@ -21,7 +21,7 @@ public class Day8 : AdventSolver {
             if (str.EndsWith('A')) counts.Add(solver.GetNumSteps(str, (s) => s.EndsWith('Z')));
         }
 
-        Console.WriteLine("Solution for part 2 is: " + AggregationUtils.Lcm(counts));
+        Console.WriteLine("Solution for part 2 is: " + IEnumerableUtils.Lcm(counts));
     }
 
     public class Solver {
