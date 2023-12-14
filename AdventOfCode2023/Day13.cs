@@ -14,10 +14,10 @@ public class Day13 : AdventSolver {
         int count1 = 0;
         int count2 = 0;
 
-        IEnumerable<IEnumerable<string>> valleys = IEnumerableUtils.ChunkByElement([..ReadLines(filename)], "");
+        IEnumerable<IEnumerable<string>> valleys = IEnumerableUtils.ChunkByElement([.. ReadLines(filename)], "");
 
-        foreach(List<string> valley in valleys.Select((str) => str.ToList())) {
-            var valleyT = StringUtils.Transpose(valley).ToList();
+        foreach (List<string> valley in valleys.Select((str) => str.ToList())) {
+            List<string> valleyT = valley.Transpose().Select(s => new String(s.ToArray())).ToList();
             count1 += CalculateReflections(valley, valleyT, 0);
             count2 += CalculateReflections(valley, valleyT, 1);
         }
@@ -34,7 +34,7 @@ public class Day13 : AdventSolver {
             return result * 100;
         }
     }
-    
+
     public int CalculateReflectionRows(List<string> valley, int numAllowed) {
         // In order for there to be a match there must be consecutive duplicates
         // So we start by scanning through pairs to see if they are duplicates, and if they are then keep scanning
@@ -43,7 +43,7 @@ public class Day13 : AdventSolver {
 
             for (int offset = 0; row + offset < valley.Count && row - offset - 1 >= 0; offset++) {
                 invalid += StringUtils.CountDifferences(valley[row + offset], valley[row - offset - 1]);
-                if(invalid > numAllowed) break;
+                if (invalid > numAllowed) break;
             }
 
             if (invalid == numAllowed) {

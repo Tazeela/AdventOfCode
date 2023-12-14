@@ -1,7 +1,6 @@
-﻿namespace AdventLib;
+namespace AdventLib;
 
-public static class StringUtils
-{
+public static class StringUtils {
     /// <summary>
     /// Tests if the original string matches searchString at an offset.
     /// </summary>
@@ -26,27 +25,15 @@ public static class StringUtils
     /// <param name="str2">Second string.</param>
     /// <returns>A number representing the count of differences.</returns>
     public static int CountDifferences(string str1, string str2) {
-        if(str1.Length != str2.Length) throw new InvalidOperationException("Must be samee length");
+        if (str1.Length != str2.Length) throw new InvalidOperationException("Must be samee length");
 
         int count = 0;
-        for(int x = 0; x < str1.Length; x++) {
-            if(str1[x] != str2[x]) count++;
+        for (int x = 0; x < str1.Length; x++) {
+            if (str1[x] != str2[x]) count++;
         }
         return count;
     }
 
-    /// <summary>
-    /// Given a list of strings transpose them (so the first string will be the first element in each of the original strings, etc.).
-    /// </summary>
-    /// <param name="strings">The list of strings to transpose</param>
-    /// <returns>The strings transposed</returns>
-    public static IEnumerable<string> Transpose(IEnumerable<string> strings) {
-        return strings.SelectMany(inner => inner.Select((item, index) => new { item, index }))
-                .GroupBy(i => i.index, i => i.item)
-                .Select(g => new string(g.ToArray()));
-    }
-
-    
     /// <summary>
     /// Replace the character at a specific position in the string.
     /// </summary>

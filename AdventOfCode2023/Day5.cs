@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using AdventLib;
-using Range = AdventLib.Common.Range;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Range = AdventLib.Common.Range;
 
 namespace AdventOfCode2023;
 
@@ -170,7 +170,7 @@ public class Day5 : AdventSolver {
         }
     }
 
-    
+
     [TestClass]
     public class Day5Test {
 

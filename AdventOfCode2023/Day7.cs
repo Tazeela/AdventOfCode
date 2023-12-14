@@ -71,16 +71,21 @@ public class Day7 : AdventSolver {
         public int Bet { get; set; }
 
         public int CompareTo(Hand? other) {
-            int handCompareResult = GetStrength(Cards).CompareTo(GetStrength(other?.Cards));
+            var otherCards = other?.Cards;
+            if (otherCards == null) {
+                return 1;
+            } else {
+                int handCompareResult = GetStrength(Cards).CompareTo(GetStrength(otherCards));
 
-            if (handCompareResult == 0) {
-                for (int x = 0; x < Cards.Length; x++) {
-                    int cardCompareResult = Array.IndexOf(Points, Cards[x]).CompareTo(Array.IndexOf(Points, other.Cards[x]));
-                    if (cardCompareResult != 0) return cardCompareResult;
+                if (handCompareResult == 0) {
+                    for (int x = 0; x < Cards.Length; x++) {
+                        int cardCompareResult = Array.IndexOf(Points, Cards[x]).CompareTo(Array.IndexOf(Points, otherCards[x]));
+                        if (cardCompareResult != 0) return cardCompareResult;
+                    }
                 }
-            }
 
-            return handCompareResult;
+                return handCompareResult;
+            }
         }
     }
 

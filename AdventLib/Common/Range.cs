@@ -1,4 +1,4 @@
-﻿namespace AdventLib.Common;
+namespace AdventLib.Common;
 
 /// <summary>
 /// Represents an inclusive range of numbers

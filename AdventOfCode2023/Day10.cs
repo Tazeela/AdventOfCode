@@ -20,7 +20,7 @@ public class Day10 : AdventSolver {
         List<string> allData = [.. ReadLines(filename)];
         char[][] data = allData.Select(str => str.ToCharArray()).ToArray();
 
-        IEnumerableUtils.PrintMatrix("Original data: ", data);
+        data.PrintMatrix("Original data", ",");
 
         Queue<(int, int, int, int, int, HashSet<string>)> q = new();
 
@@ -30,20 +30,20 @@ public class Day10 : AdventSolver {
 
         q.Enqueue((startX + 1, startY, startX, startY, 1, new HashSet<string>()));
         q.Enqueue((startX - 1, startY, startX, startY, 1, new HashSet<string>()));
-        q.Enqueue((startX , startY + 1, startX, startY, 1, new HashSet<string>()));
-        q.Enqueue((startX , startY - 1, startX, startY, 1, new HashSet<string>()));
-        
+        q.Enqueue((startX, startY + 1, startX, startY, 1, new HashSet<string>()));
+        q.Enqueue((startX, startY - 1, startX, startY, 1, new HashSet<string>()));
+
         while (q.Count > 0) {
             (int edgeX, int edgeY, int lastX, int lastY, int count, HashSet<string> path) = q.Dequeue();
             (int nextX, int nextY) = GetNext(data, edgeX, edgeY, lastX, lastY);
-            
+
             path.Add(edgeX + "," + edgeY);
-            if(nextX == 0 && nextY == 0) {
+            if (nextX == 0 && nextY == 0) {
 
                 // Found another path
                 Console.WriteLine("Solution for part 1 is: " + count);
                 Console.WriteLine("Solution for part 2 is: " + ScanHelper(data, path));
-                
+
                 break;
             } else if (nextX != -100) {
                 Console.WriteLine("Moving from [" + edgeX + "][" + edgeY + "] to [" + (edgeX + nextX) + "][" + (edgeY + nextY) + "]");
@@ -58,16 +58,16 @@ public class Day10 : AdventSolver {
         // scan left to right if odd number found then its inside
         int count = 0;
 
-        for(int y = 0; y < data.Length; y++) {
+        for (int y = 0; y < data.Length; y++) {
             bool inside = false;
-            for(int x = 0; x < data[0].Length; x++) {
-                if(path.Contains(x + "," + y)) {
+            for (int x = 0; x < data[0].Length; x++) {
+                if (path.Contains(x + "," + y)) {
                     // TODO: If the S if a J or L then it needs to be here, if not it needs to be skipped, should find that out and replace it
-                    if(data[y][x] == '|' || data[y][x] == 'J' || data[y][x] == 'L') {
+                    if (data[y][x] == '|' || data[y][x] == 'J' || data[y][x] == 'L') {
                         inside = !inside;
                     }
                 } else {
-                    if(inside) {
+                    if (inside) {
                         count++;
                     }
                 }

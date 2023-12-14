@@ -1,5 +1,5 @@
-using AdventLib;
 using System.Text.RegularExpressions;
+using AdventLib;
 
 namespace AdventOfCode2023;
 
@@ -12,7 +12,6 @@ public class Day8 : AdventSolver {
     public override void Solve(string filename) {
         Solver solver = new([.. ReadLines(filename)]);
         Console.WriteLine("Solution for part 1 is: " + solver.GetNumSteps("AAA", (s) => s == "ZZZ"));
-        
 
         // TODO: This is clearly what they wanted but its only correct for the inputs they provide which 
         // take the same number of steps to loop through z -> z as for a -> z. 

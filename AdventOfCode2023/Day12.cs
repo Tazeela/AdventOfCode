@@ -44,17 +44,17 @@ public class Day12 : AdventSolver {
             return 0;
         } else {
 
-            for(int x = 0; x < foundNums.Count; x++) {
-                if(nums[x] != foundNums[x]) return 0;
+            for (int x = 0; x < foundNums.Count; x++) {
+                if (nums[x] != foundNums[x]) return 0;
             }
 
-            if(nums.Count == foundNums.Count && newStr.IndexOf('#') < 0) return 1;
+            if (nums.Count == foundNums.Count && newStr.IndexOf('#') < 0) return 1;
 
             // check if we can make another then do it
-            int indexOfNextWild = newStr.IndexOf('?'); 
+            int indexOfNextWild = newStr.IndexOf('?');
             if (indexOfNextWild >= 0) {
                 List<int> numsCopy = new(nums);
-                foreach(var num in foundNums) numsCopy.Remove(num);
+                foreach (var num in foundNums) numsCopy.Remove(num);
                 return GetNumPermutations(StringUtils.ReplaceCharAt(newStr, '.', indexOfNextWild), numsCopy) + GetNumPermutations(StringUtils.ReplaceCharAt(newStr, '#', indexOfNextWild), numsCopy);
             } else {
                 return 0; // there are no more wildcards so we cant make the rest of the groups
@@ -95,7 +95,7 @@ public class Day12 : AdventSolver {
 
     public (string, List<int>) ParseLine(string game, int reps) {
         var strs = game.Split(" ");
-        var chars =  string.Join('?', Enumerable.Repeat(strs[0], reps));
+        var chars = string.Join('?', Enumerable.Repeat(strs[0], reps));
         var digits = Enumerable.Repeat(strs[1], reps).SelectMany(s => s.Split(',')).Select(s => int.Parse(s)).ToList();
 
         return (chars, digits);
@@ -106,10 +106,10 @@ public class Day12 : AdventSolver {
 
         [TestMethod]
         public void Test1() {
-            Assert.AreEqual(1, GetNumPermutations("???.###",  [1,1,3]));
+            Assert.AreEqual(1, GetNumPermutations("???.###", [1, 1, 3]));
 
-            Assert.AreEqual(0, GetNumPermutations(".?.?##.",  [1,1,3]));
-            
+            Assert.AreEqual(0, GetNumPermutations(".?.?##.", [1, 1, 3]));
+
             Assert.AreEqual(4, GetNumPermutations(".??..??...?##.", [1, 1, 3]));
             Assert.AreEqual(1, GetNumPermutations("?#?#?#?#?#?#?#?", [1, 3, 1, 6]));
 

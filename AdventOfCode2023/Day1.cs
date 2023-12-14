@@ -78,6 +78,4 @@ public class Day1 : AdventSolver {
 
         return 0;
     }
-
-    
 }
