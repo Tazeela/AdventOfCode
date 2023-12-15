@@ -10,10 +10,10 @@ namespace AdventOfCode2022;
 public class NoSpace : AdventSolver {
     public override string Day => "day7";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         GraphNode root = new GraphNode("/", null);
         GraphNode current = root;
-        foreach (string line in ReadLines(filename)) {
+        foreach (string line in ReadInputAsIEnumerable()) {
             if (line.StartsWith("$ cd ")) {
                 string newPath = line.Substring(5);
                 if (newPath == "/") {

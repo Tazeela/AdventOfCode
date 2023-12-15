@@ -16,9 +16,8 @@ public class Day10 : AdventSolver {
     // The list of all edge locations, this list assumes diagonally edges as well.
     private static readonly (int, int)[] Edges = [(-1, 0), (0, -1), (0, 1), (1, 0)];
 
-    public override void Solve(string filename) {
-        List<string> allData = [.. ReadLines(filename)];
-        char[][] data = allData.Select(str => str.ToCharArray()).ToArray();
+    public override void Solve() {
+        char[][] data = ReadInputAsCharArray();
 
         data.PrintMatrix("Original data", ",");
 

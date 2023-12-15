@@ -20,11 +20,11 @@ public class Day1 : AdventSolver {
         {"nine", '9'},
     };
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
         int count2 = 0;
 
-        foreach (string game in ReadLines(filename)) {
+        foreach (string game in ReadInputAsIEnumerable()) {
             count1 += CalculateCalibrationValue(game, false);
             count2 += CalculateCalibrationValue(game, true);
         }

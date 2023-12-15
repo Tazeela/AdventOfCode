@@ -12,11 +12,11 @@ public class Day3 : AdventSolver {
     // The list of all edge locations, this list assumes diagonally edges as well.
     private static readonly (int, int)[] Edges = [(-1, 0), (-1, -1), (-1, 1), (0, -1), (0, 1), (1, 0), (1, -1), (1, 1)];
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
         int count2 = 0;
 
-        List<string> allData = [.. ReadLines(filename)];
+        List<string> allData = ReadInputAsList();
 
         count1 = GetAllPartNumbers(allData, null).Values.SelectMany(parts => parts).Sum();
         count2 = GetAllPartNumbers(allData, ['*']).Values.Where(parts => parts.Count == 2).Select(parts => parts[0] * parts[1]).Sum();

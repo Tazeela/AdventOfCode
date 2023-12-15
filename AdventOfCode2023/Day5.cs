@@ -11,8 +11,8 @@ namespace AdventOfCode2023;
 public class Day5 : AdventSolver {
     public override string Day => "day5";
 
-    public override void Solve(string filename) {
-        List<string> allData = [.. ReadLines(filename)];
+    public override void Solve() {
+        List<string> allData = ReadInputAsList();
 
         long[] seeds = allData[0].Split(":", StringSplitOptions.TrimEntries)[1].Split(" ").Select(long.Parse).ToArray();
 

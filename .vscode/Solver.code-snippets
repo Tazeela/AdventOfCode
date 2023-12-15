@@ -31,12 +31,11 @@
          "public class $TM_FILENAME_BASE : AdventSolver {",
          "\tpublic override string Day => \"day$2\";",
          "",
-         "\tpublic override void Solve(string filename) {",
+         "\tpublic override void Solve() {",
          "\t\tint count1 = 0;",
          "\t\tint count2 = 0;",
          "",
-         " \t\t//List<string> allData = [.. ReadLines(filename)];",
-         "\t\tforeach (String game in ReadLines(filename)) {"
+         "\t\tforeach (String game in ReadInputAsIEnumerable()) {"
          "\t\t\t$0",
          "\t\t}",
          "",

@@ -10,36 +10,40 @@ namespace AdventOfCode2023;
 public class Day14 : AdventSolver {
     public override string Day => "day14";
 
-    public Dictionary<string, (char[][], int)> cache = new Dictionary<string, (char[][], int)>();
-
-    public override void Solve(string filename) {
-        List<string> allData = [.. ReadLines(filename)];
-        char[][] allDataChars1 = allData.Select(s => s.ToCharArray()).ToArray();
+    public override void Solve() {
+        char[][] allDataChars1 = ReadInputAsCharArray();
         TiltNorth(allDataChars1);
         Console.WriteLine("Solution for part 1 is: " + CalculatePoints(allDataChars1));
 
-        char[][] allDataChars2 = allData.Select(s => s.ToCharArray()).ToArray();
+        // Reread the file since we modified the original array above.
+        char[][] allDataChars2 = ReadInputAsCharArray();
         Cycle(allDataChars2, 1000000000);
         Console.WriteLine("Solution for part 2 is: " + CalculatePoints(allDataChars2));
     }
 
-    public void Cycle(char[][] data, int cycleCount) {
-        List<int> loop = [];
+    /// <summary>
+    /// Cycle through NWSE cycleCount times. If we determine that the data has an inner loop (one input goes back to a previous)
+    ///  then we cant skip ahead to the end of the data.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="cycleCount"></param>
+    public static void Cycle(char[][] data, int cycleCount) {
+        List<int> results = [];
 
         for (int x = 0; x < cycleCount; x++) {
             TiltNorth(data);
             TiltWest(data);
             TiltSouth(data);
             TiltEast(data);
-            
+
             int hash = string.Join(":", data.Select(s => new string(s))).GetHashCode();
 
-            if (loop.Contains(hash)) {
-                // We already calculated this before, so take the number of cycles between then and now and skip that far ahead
-                int size = x - loop.IndexOf(hash);
-                while (x + size < cycleCount) x += size;
+            if (results.Contains(hash)) {
+                // We already calculated this before, so take the number of cycles between then and now and skip that far aheadx
+                int size = x - results.IndexOf(hash);
+                x += size * ((cycleCount - x) / size);
             } else {
-                loop.Add(hash);
+                results.Add(hash);
             }
         }
     }
@@ -75,7 +79,7 @@ public class Day14 : AdventSolver {
         for (int x = 0; x < indexes.Length; x++) {
             if (input[indexes[x].Item1][indexes[x].Item2] == 'O') {
                 input[indexes[offset].Item1][indexes[offset].Item2] = input[indexes[x].Item1][indexes[x].Item2];
-                if(offset != x) input[indexes[x].Item1][indexes[x].Item2] = '.';
+                if (offset != x) input[indexes[x].Item1][indexes[x].Item2] = '.';
                 offset++;
             } else if (input[indexes[x].Item1][indexes[x].Item2] == '#') {
                 offset = x + 1;

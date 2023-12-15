@@ -16,11 +16,11 @@ public class Day12 : AdventSolver {
 
     public static Dictionary<string, long> cache = new Dictionary<string, long>();
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         long count1 = 0;
         int count2 = 0;
 
-        foreach (var game in ReadLines(filename).Select(s => ParseLine(s, 5))) {
+        foreach (var game in ReadInputAsIEnumerable().Select(s => ParseLine(s, 5))) {
             count1 += GetNumPermutations(game.Item1, game.Item2);
         }
 

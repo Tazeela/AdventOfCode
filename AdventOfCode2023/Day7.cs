@@ -11,14 +11,14 @@ public class Day7 : AdventSolver {
 
     private static readonly char[] Points = ['X', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
         int count2 = 0;
 
         List<Hand> problem1Hands = [];
         List<Hand> problem2Hands = [];
 
-        foreach (String game in ReadLines(filename)) {
+        foreach (String game in ReadInputAsList()) {
             problem1Hands.Add(new Hand(game, false));
             problem2Hands.Add(new Hand(game, true));
         }

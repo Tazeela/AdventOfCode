@@ -29,4 +29,14 @@ public static class MathUtils {
         return a * b / Gcd(a, b);
     }
 
+    /// <summary>
+    /// Calcutate the distance between two points, if you can only travel horizontally and vertically.
+    /// </summary>
+    /// <param name="p1">Start point.</param>
+    /// <param name="p2">End point.</param>
+    /// <returns>The distance between the points.</returns>
+    public static long CalculateDistance((long, long) p1, (long, long) p2) {
+        return Math.Abs(p2.Item1 - p1.Item1) + Math.Abs(p2.Item2 - p1.Item2);
+    }
+
 }

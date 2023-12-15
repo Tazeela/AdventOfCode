@@ -10,11 +10,11 @@ namespace AdventOfCode2022;
 public class RucksackReorg : AdventSolver {
     public override string Day => "day3";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int points1 = 0;
         int points2 = 0;
 
-        foreach (string[] rucksacks in ReadLines(filename).Chunk(3)) {
+        foreach (string[] rucksacks in ReadInputAsIEnumerable().Chunk(3)) {
             points1 += GetPriority(FindMisplacedItems(rucksacks[0]));
             points1 += GetPriority(FindMisplacedItems(rucksacks[1]));
             points1 += GetPriority(FindMisplacedItems(rucksacks[2]));

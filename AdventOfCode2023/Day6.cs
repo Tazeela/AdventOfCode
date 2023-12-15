@@ -9,10 +9,10 @@ namespace AdventOfCode2023;
 public class Day6 : AdventSolver {
     public override string Day => "day6";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         long count1 = 1;
 
-        List<string> allData = [.. ReadLines(filename)];
+        List<string> allData = ReadInputAsList();
 
         var times = allData[0].Split(":")[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(long.Parse).ToArray();
         var distances = allData[1].Split(":")[1].Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(long.Parse).ToArray();

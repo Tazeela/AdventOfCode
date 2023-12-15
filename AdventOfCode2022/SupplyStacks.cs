@@ -10,9 +10,9 @@ namespace AdventOfCode2022;
 public class SupplyStacks : AdventSolver {
     public override string Day => "day5";
 
-    public override void Solve(string filename) {
-        Console.WriteLine("Solution for part 1 is: " + SortStacks(filename, 1));
-        Console.WriteLine("Solution for part 2 is: " + SortStacks(filename, int.MaxValue));
+    public override void Solve() {
+        Console.WriteLine("Solution for part 1 is: " + SortStacks(1));
+        Console.WriteLine("Solution for part 2 is: " + SortStacks(int.MaxValue));
     }
 
     /// <summary>
@@ -21,12 +21,12 @@ public class SupplyStacks : AdventSolver {
     /// <param name="filename">The file to load the game from.</param>
     /// <param name="craneLoadSize">The number of items the crane can move at once</param>
     /// <returns>A string that represents the top item in each stack after all operations.</returns>
-    private string SortStacks(string filename, int craneLoadSize) {
+    private string SortStacks(int craneLoadSize) {
         Dictionary<int, LinkedList<char>> stacks = new Dictionary<int, LinkedList<char>>();
 
         bool moving = false;
 
-        foreach (string game in ReadLines(filename)) {
+        foreach (string game in ReadInputAsIEnumerable()) {
             if (!moving) {
                 // There is a line which labels the number of crates which we use to indicate we are done building
                 if (char.IsAsciiDigit(game[1])) {

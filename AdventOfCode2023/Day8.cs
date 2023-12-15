@@ -9,8 +9,8 @@ namespace AdventOfCode2023;
 public class Day8 : AdventSolver {
     public override string Day => "day8";
 
-    public override void Solve(string filename) {
-        Solver solver = new([.. ReadLines(filename)]);
+    public override void Solve() {
+        Solver solver = new(ReadInputAsList());
         Console.WriteLine("Solution for part 1 is: " + solver.GetNumSteps("AAA", (s) => s == "ZZZ"));
 
         // TODO: This is clearly what they wanted but its only correct for the inputs they provide which 

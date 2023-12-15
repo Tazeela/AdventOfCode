@@ -8,10 +8,10 @@ namespace AdventOfCode2022;
 public class RockPaperScissors : AdventSolver {
     public override string Day => "day2";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int sum1 = 0;
         int sum2 = 0;
-        foreach (string game in ReadLines(filename)) {
+        foreach (string game in ReadInputAsIEnumerable()) {
             sum1 += DetermineScorePart1(game[0], game[2]);
             sum2 += DetermineScorePart2(game[0], game[2]);
         }

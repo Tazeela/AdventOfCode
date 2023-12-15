@@ -34,6 +34,16 @@ public static class StringUtils {
         return count;
     }
 
+
+    /// <summary>
+    /// Its common for puzzles to treat the input as a 
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    public static char[][] ToCharArray(this IEnumerable<string> data) {
+        return data.Select(s => s.ToCharArray()).ToArray();
+    }
+
     /// <summary>
     /// Replace the character at a specific position in the string.
     /// </summary>

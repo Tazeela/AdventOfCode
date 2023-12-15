@@ -10,11 +10,11 @@ namespace AdventOfCode2023;
 public class Day4 : AdventSolver {
     public override string Day => "day4";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
 
         // preread all lines so we know the count to allocate our array for
-        List<string> allData = [.. ReadLines(filename)];
+        List<string> allData = ReadInputAsList();
 
         int[] numCards = Enumerable.Repeat(1, allData.Count).ToArray();
 

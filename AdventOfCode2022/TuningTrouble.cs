@@ -9,8 +9,8 @@ namespace AdventOfCode2022;
 public class TuningTrouble : AdventSolver {
     public override string Day => "day6";
 
-    public override void Solve(string filename) {
-        foreach (string game in ReadLines(filename)) {
+    public override void Solve() {
+        foreach (string game in ReadInputAsIEnumerable()) {
             Console.WriteLine("Solution for part 1 is: " + FindFirstMarker(game, 4));
             Console.WriteLine("Solution for part 2 is: " + FindFirstMarker(game, 14));
         }

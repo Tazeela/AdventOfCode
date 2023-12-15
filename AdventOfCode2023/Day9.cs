@@ -9,12 +9,11 @@ namespace AdventOfCode2023;
 public class Day9 : AdventSolver {
     public override string Day => "day9";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
         int count2 = 0;
 
-        //List<string> allData = [.. ReadLines(filename)];
-        foreach (String game in ReadLines(filename)) {
+        foreach (String game in ReadInputAsList()) {
             count1 += FindNext(game.Split(" ").Select(int.Parse).ToArray());
             count2 += FindNext(game.Split(" ").Select(int.Parse).Reverse().ToArray());
         }

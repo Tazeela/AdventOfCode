@@ -8,12 +8,12 @@ namespace AdventOfCode2023;
 public class Day2 : AdventSolver {
     public override string Day => "day2";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
         int count2 = 0;
 
         int line = 0;
-        foreach (String game in ReadLines(filename)) {
+        foreach (String game in ReadInputAsIEnumerable()) {
             line += 1;
             var maxCubes = GetMaxCubesByColor(game);
 

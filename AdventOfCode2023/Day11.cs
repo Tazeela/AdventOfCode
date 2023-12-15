@@ -9,29 +9,22 @@ namespace AdventOfCode2023;
 public class Day11 : AdventSolver {
     public override string Day => "day11";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         long count1 = 0;
         int count2 = 0;
 
-        List<string> originalData = [.. ReadLines(filename)];
-
-        var galaxies = GetAllGalaxies(originalData);
+        var galaxies = GetAllGalaxies(ReadInputAsList());
         Console.WriteLine("All galaxies " + string.Join(",", galaxies));
         int numPairs = 0;
         for (int x = 0; x < galaxies.Length; x++) {
             for (int y = x + 1; y < galaxies.Length; y++) {
                 numPairs++;
-                count1 += CalculateDistance(galaxies[x], galaxies[y]);
+                count1 += MathUtils.CalculateDistance(galaxies[x], galaxies[y]);
             }
         }
 
         Console.WriteLine("Solution for part 1 is: " + count1 + "   " + numPairs);
         Console.WriteLine("Solution for part 2 is: " + count2);
-    }
-
-    public static long CalculateDistance((long, long) p1, (long, long) p2) {
-        long distance = Math.Abs(p2.Item1 - p1.Item1) + Math.Abs(p2.Item2 - p1.Item2);
-        return distance;
     }
 
     public static (long, long)[] GetAllGalaxies(List<string> originalData) {

@@ -10,11 +10,11 @@ namespace AdventOfCode2023;
 public class Day13 : AdventSolver {
     public override string Day => "day13";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
         int count2 = 0;
 
-        IEnumerable<IEnumerable<string>> valleys = IEnumerableUtils.ChunkByElement([.. ReadLines(filename)], "");
+        IEnumerable<IEnumerable<string>> valleys = ReadInputChunkByElement();
 
         foreach (List<string> valley in valleys.Select((str) => str.ToList())) {
             List<string> valleyT = valley.Transpose().Select(s => new String(s.ToArray())).ToList();

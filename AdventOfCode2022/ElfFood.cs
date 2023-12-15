@@ -9,14 +9,14 @@ using AdventLib;
 public class ElfFood : AdventSolver {
     public override string Day => "day1";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int limit = 3;
         int current = 0;
 
         // Initialize with a capacity of limit + 1 so we have room to add an extra and remove it
         PriorityQueue<int, int> priorityQueue = new(limit + 1);
 
-        foreach (string text in base.ReadLines(filename)) {
+        foreach (string text in base.ReadInputAsIEnumerable()) {
             if (string.IsNullOrEmpty(text)) {
                 EnqueueIfRoom(priorityQueue, current, limit);
                 current = 0;

@@ -8,11 +8,11 @@ namespace AdventOfCode2022;
 public class CampCleanup : AdventSolver {
     public override string Day => "day4";
 
-    public override void Solve(string filename) {
+    public override void Solve() {
         int count1 = 0;
         int count2 = 0;
-        foreach (string pairing in ReadLines(filename)) {
-            int[] parts = pairing.Split(new char[] { '-', ',' }).Select(str => int.Parse(str)).ToArray();
+        foreach (string pairing in ReadInputAsIEnumerable()) {
+            int[] parts = pairing.Split(['-', ',']).Select(int.Parse).ToArray();
 
             if (CheckIfOverlapEntirely(parts[0], parts[1], parts[2], parts[3])) {
                 count1++;

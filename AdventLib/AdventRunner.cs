@@ -30,8 +30,9 @@ public static class AdventRunner {
         } else {
             // TODO: Check file exists?
             var solver = solversMap[args[1]];
+            solver.InputFileName = args[2];
             Stopwatch sw = Stopwatch.StartNew();
-            solver.Solve(args[2]);
+            solver.Solve();
             sw.Stop();
             Console.WriteLine(String.Format("Solved in {0}ms", sw.ElapsedMilliseconds));
         }
