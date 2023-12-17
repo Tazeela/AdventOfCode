@@ -42,6 +42,11 @@ public static class IEnumerableUtils {
                 .GroupBy(i => i.index, i => i.item);
     }
 
+    public static IEnumerable<int> Indexes<T>(this T[] elements) {
+        for(int x = 0; x < elements.Length; x++) {
+            yield return x;
+        }
+    }
 
     public static void PrintArray<T>(this IEnumerable<T> elements, string name, string seperator = ",") {
         Console.WriteLine(string.Format("[{0}] - {1}", name, string.Join(",", elements)));
