@@ -15,7 +15,7 @@ public abstract class AdventSolver {
     /// </summary>
     public string? InputFileName {
         get;
-        internal set;
+        set;
     }
 
     /// <summary>
