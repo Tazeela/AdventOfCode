@@ -21,7 +21,7 @@ public class Day18 : AdventSolver {
             var direction1 = split[0];
             var distance1 = int.Parse(split[1]);
             count1 += distance1;
-            foreach (var step in GetAllSteps(direction1, distance1, points1.Last())) {
+            foreach (var step in GetAllPoints(direction1, distance1, points1.Last())) {
                 points1.Add(step);
             }
 
@@ -34,7 +34,7 @@ public class Day18 : AdventSolver {
             var distance2 = Convert.ToInt32(split[2].Substring(2, 5), 16);
             
             count2 += distance2;
-            foreach (var step in GetAllSteps(direction2, distance2, points2.Last())) {
+            foreach (var step in GetAllPoints(direction2, distance2, points2.Last())) {
                 points2.Add(step);
             }
         }
@@ -46,7 +46,7 @@ public class Day18 : AdventSolver {
         Console.WriteLine("Solution for part 2 is: " + count2);
     }
 
-    public IEnumerable<(long, long)> GetAllSteps(string direction, long distance, (long, long) last) {
+    public static IEnumerable<(long, long)> GetAllPoints(string direction, long distance, (long, long) last) {
         switch (direction) {
             case "U":
                 for (int x = 1; x <= distance; x++) {
