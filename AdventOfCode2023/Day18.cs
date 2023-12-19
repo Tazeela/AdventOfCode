@@ -40,20 +40,10 @@ public class Day18 : AdventSolver {
         }
 
 
-        count1 += (long)(InteriorArea(points1) + 1 - (points1.Count / 2));
-        count2 += (long)(InteriorArea(points2) + 1 - (points2.Count / 2));
+        count1 += (long)MathUtils.PolygonArea(points1);
+        count2 += (long)MathUtils.PolygonArea(points2);
         Console.WriteLine("Solution for part 1 is: " + count1);
         Console.WriteLine("Solution for part 2 is: " + count2);
-    }
-
-
-    static double InteriorArea(List<(long, long)> v) {
-        int n = v.Count;
-        double a = 0.0;
-        for (int i = 0; i < n - 1; i++) {
-            a += v[i].Item1 * v[i + 1].Item2 - v[i + 1].Item1 * v[i].Item2;
-        }
-        return Math.Abs(a + v[n - 1].Item1 * v[0].Item2 - v[0].Item1 * v[n - 1].Item2) / 2.0;
     }
 
     public IEnumerable<(long, long)> GetAllSteps(string direction, long distance, (long, long) last) {
