@@ -89,17 +89,14 @@ public class Day20 : AdventSolver {
 
     public static long CalculatePeriod(Dictionary<string, Module> modules, string target) {
         // Assumes that target has 1 Source, which is a 4x Conjunction
-        Dictionary<string, List<long>> watchlist = [];
+        Dictionary<string, long> watchlist = [];
 
         // Get the sources for the conjunction and watch them
-        var conjunction = modules[target].Sources[0];
-        foreach (var conjSource in modules[conjunction].Sources) {
-            // for each input to the conjunction add it to the list
-            watchlist.Add(conjSource, []);
-        }
+        var conjunction = modules[modules[target].Sources[0]];
+        var conjunctionSources = conjunction.Sources;
 
         // Run until we have 2 values for everything in the watchlist and can determine the period between them
-        for (int x = 0; watchlist.Values.Any(l => l.Count < 2); x++) {
+        for (int iteration = 1; watchlist.Count < conjunctionSources.Count; iteration++) {
             Queue<ModuleTrigger> triggers = [];
             triggers.Enqueue(ButtonTrigger);
 
@@ -107,8 +104,8 @@ public class Day20 : AdventSolver {
                 var next = triggers.Dequeue();
                 if (modules.ContainsKey(next.Target)) {
                     foreach (var triggered in modules[next.Target].Trigger(next.Source, next.pulse)) {
-                        if (watchlist.TryGetValue(next.Source, out List<long>? value) && next.Target == "hf" && next.pulse == Pulse.High) {
-                            value.Add(x);
+                        if (!watchlist.ContainsKey(next.Source) && conjunctionSources.Contains(next.Source) && next.Target == conjunction.Name && next.pulse == Pulse.High) {
+                            watchlist[next.Source] = iteration;
                         }
                         triggers.Enqueue(triggered);
                     }
@@ -117,7 +114,7 @@ public class Day20 : AdventSolver {
         }
 
         // calculate the period between and generate an LCM
-        return watchlist.Keys.Select(key => watchlist[key][1] - watchlist[key][0]).Lcm();
+        return watchlist.Values.Lcm();
     }
 
     public enum Pulse {
