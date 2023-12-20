@@ -43,7 +43,6 @@ public class Day1 : AdventSolver {
     /// <param name="allowSpelled">True if we should include spelled out digits 1-9, false if not.</param>
     /// <returns>The first and last digit, merged into the calibration value.</returns>
     public static int CalculateCalibrationValue(string line, bool allowSpelled) {
-        var results = new List<char>();
         int first = 0;
         int last = 0;
 

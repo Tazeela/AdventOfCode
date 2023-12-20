@@ -21,10 +21,10 @@ public class Day19 : AdventSolver {
         var part1Ranges = chunks[1].Select(ParseXmasRange);
 
         Console.WriteLine("Valid ranges are:");
-        foreach(var range in validRanges) {
+        foreach (var range in validRanges) {
             Console.WriteLine(range);
         }
-        
+
         Console.WriteLine("Solution for part 1 is: " + part1Ranges.Where(inputRange => validRanges.Any(r => inputRange.IsSubset(r))).Select(r => r.GetPart1Score()).Sum());
         Console.WriteLine("Solution for part 2 is: " + validRanges.Select(r => r.GetPart2Score()).Sum());
     }
@@ -48,7 +48,7 @@ public class Day19 : AdventSolver {
             if (rule.Goto == "A") {
                 yield return coveredRange;
             } else if (rule.Goto != "R") {
-                foreach(var range in FindAllRanges(workflows, coveredRange, rule.Goto, history)) {
+                foreach (var range in FindAllRanges(workflows, coveredRange, rule.Goto, history)) {
                     yield return range;
                 }
             }
@@ -154,8 +154,8 @@ public class Day19 : AdventSolver {
         }
 
         public bool IsSubset(XmasRange other) {
-            foreach((string category, Range range) in this.Ranges) {
-                if(!other.Ranges.ContainsKey(category) || !range.IsSubset(other.Ranges[category])) {
+            foreach ((string category, Range range) in this.Ranges) {
+                if (!other.Ranges.ContainsKey(category) || !range.IsSubset(other.Ranges[category])) {
                     return false;
                 }
             }
@@ -173,7 +173,7 @@ public class Day19 : AdventSolver {
 
         public XmasRange Clone() {
             Dictionary<string, Range> ranges = [];
-            foreach(var kvp in this.Ranges) ranges.Add(kvp.Key, kvp.Value); 
+            foreach (var kvp in this.Ranges) ranges.Add(kvp.Key, kvp.Value);
             return new XmasRange(ranges);
         }
 
