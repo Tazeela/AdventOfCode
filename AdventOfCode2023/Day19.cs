@@ -38,7 +38,6 @@ public class Day19 : AdventSolver {
     /// <param name="history"></param>
     /// <returns></returns>
     public IEnumerable<XmasRange> FindAllRanges(Dictionary<string, List<Rule>> workflows, XmasRange currentRange, string currentWorkflow, string history) {
-        long result = 0;
         history += "-> " + currentWorkflow;
 
         foreach (var rule in workflows[currentWorkflow]) {

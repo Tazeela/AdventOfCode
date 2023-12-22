@@ -15,7 +15,6 @@ public class Day15 : AdventSolver {
 
     public override void Solve() {
         int count1 = 0;
-        int count2 = 0;
 
         foreach (string game in ReadInputAsIEnumerable()) {
             foreach (string operation in game.Split(",")) {
@@ -36,7 +35,7 @@ public class Day15 : AdventSolver {
                     string label = split[0];
                     int length = int.Parse(split[1]);
                     int hash = HolidayHash(label);
-                    var lens = new Lens() { Label = label, Length = length };
+                    Lens lens = new (label, length);
                     if (!map.TryGetValue(hash, out List<Lens>? box)) {
                         map[hash] = [lens];
                     } else {
@@ -55,9 +54,9 @@ public class Day15 : AdventSolver {
         Console.WriteLine("Solution for part 2 is: " + GetFocusingPower());
     }
 
-    public class Lens {
-        public string Label { get; set; }
-        public int Length { get; set; }
+    public class Lens(string label, int length) {
+        public string Label = label;
+        public int Length = length;
 
         public override string ToString() {
             return string.Format("[{0} {1}]", Label, Length);

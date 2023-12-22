@@ -62,4 +62,8 @@ public static class MathUtils {
     public static double PolygonArea(List<(long, long)> points) {
         return (long)(InteriorArea(points) + 1 - (points.Count() / 2));
     }
+
+    public static long PositiveModulo(long num, long modulo) {
+        return ((num % modulo) + modulo) % modulo; 
+    }
 }

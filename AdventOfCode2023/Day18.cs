@@ -29,7 +29,8 @@ public class Day18 : AdventSolver {
                 '0' => "R",
                 '1' => "D",
                 '2' => "L",
-                '3' => "U"
+                '3' => "U",
+                _ => throw new NotImplementedException()
             };
             var distance2 = Convert.ToInt32(split[2].Substring(2, 5), 16);
             

@@ -42,6 +42,20 @@ public static class IEnumerableUtils {
                 .GroupBy(i => i.index, i => i.item);
     }
 
+    public static (int, int) FindElement<T>(this T[][] elements, T target) {
+        if(target == null) throw new InvalidOperationException("Cant search for null");
+
+        foreach(var x in elements.Indexes()) {
+            foreach(var y in elements[0].Indexes()) {
+                if(target.Equals(elements[x][y])) {
+                    return (x, y);
+                }
+            }
+        }
+
+        return (-1, -1);
+    }
+
     public static IEnumerable<int> Indexes<T>(this T[] elements) {
         for(int x = 0; x < elements.Length; x++) {
             yield return x;
