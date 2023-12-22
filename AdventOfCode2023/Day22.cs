@@ -12,8 +12,7 @@ public class Day22 : AdventSolver {
         List<Brick> bricks = [.. ReadInputAsIEnumerable().Select(s => new Brick(s)).OrderBy(s => s.Z1)]; 
 
         BuildGraph(bricks);
-        Drop(bricks);
-        
+
         Console.WriteLine("Solution for part 1 is: " + CountCanDisentigrate(bricks));
         Console.WriteLine("Solution for part 2 is: " + CountHowManyFall(bricks));
     }
@@ -31,9 +30,16 @@ public class Day22 : AdventSolver {
                 highestBrick[coord] = currentBrick;
             }
 
-            currentBrick.Below.AddRange(below);
-            foreach(var brickBelow in below) {
-                brickBelow.Above.Add(currentBrick);
+            int newHeight = below.Count == 0 ? 1 : below.Max(b => b.Z2) + 1;
+            currentBrick.Z2 = currentBrick.Z2 - currentBrick.Z1 + newHeight ;
+            currentBrick.Z1 = newHeight;
+
+            if(below.Count > 0) {
+                // only add dependendencies on bricks immediately above/below
+                foreach(var brickBelow in below.Where(b => b.Z2 == currentBrick.Z1 - 1)) {
+                    currentBrick.Below.Add(brickBelow);
+                    brickBelow.Above.Add(currentBrick);
+                }
             }
         }
     }
@@ -44,8 +50,8 @@ public class Day22 : AdventSolver {
 
         foreach(var brick in bricks) {
             bool canDisentigrate = true;
-            foreach(var above in brick.GetDirectlyAbove()) {
-                if(above.GetDirectlyBelow().Count() == 1) {
+            foreach(var above in brick.Above) {
+                if(above.Below.Count() == 1) {
                     canDisentigrate = false;
                 }
             }
@@ -67,8 +73,8 @@ public class Day22 : AdventSolver {
             while(todo.Count > 0) {
                 var nextBrick = todo.Dequeue();
                 removed.Add(nextBrick);
-                foreach(var aboveNext in nextBrick.GetDirectlyAbove()) {
-                    if(aboveNext.GetDirectlyBelow().All(removed.Contains)) {
+                foreach(var aboveNext in nextBrick.Above) {
+                    if(aboveNext.Below.All(removed.Contains)) {
                         todo.Enqueue(aboveNext);
                         count++;
                     }
@@ -78,22 +84,8 @@ public class Day22 : AdventSolver {
         return count;
     }
 
-    public static void Drop(List<Brick> bricks) {
-        // Sort all of the bricks
-        foreach(var currentBrick in bricks) {
-            int newHeight = currentBrick.Below.Count == 0 ? 1 : currentBrick.Below.Max(b => b.Z2) + 1;
-            currentBrick.Z2 = currentBrick.Z2 - currentBrick.Z1 + newHeight ;
-            currentBrick.Z1 = newHeight;
-        }
-    }
-
     public class Brick {
         public int X1, Y1, Z1, X2, Y2, Z2;
-
-        public string Name;
-
-        public bool Settled = false;
-
         public readonly List<Brick> Above = [];
         public readonly List<Brick> Below = [];
 
@@ -111,14 +103,6 @@ public class Day22 : AdventSolver {
             Z2 = int.Parse(pos2[2]);
         }
 
-        public IEnumerable<Brick> GetDirectlyBelow() {
-            return Below.Where(b => b.Z2 + 1 == Z1);
-        }
-
-        public IEnumerable<Brick> GetDirectlyAbove() {
-            return Above.Where(b => Z2 + 1 == b.Z1);
-        }
-
         public IEnumerable<string> GetAllCoords() {
             for (int x = X1; x <= X2; x++) {
                 for (int y = Y1; y <= Y2; y++) {
@@ -128,7 +112,7 @@ public class Day22 : AdventSolver {
         }
 
         public override string ToString() {
-            return string.Format("([{0}] {1},{2},{3}~{4},{5},{6})", Name, X1, Y1, Z1, X2, Y2, Z2);
+            return string.Format("([{0}] {1},{2},{3}~{4},{5},{6})", X1, Y1, Z1, X2, Y2, Z2);
         }
     }
 }
