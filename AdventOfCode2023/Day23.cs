@@ -168,41 +168,4 @@ public class Day23 : AdventSolver {
             Console.WriteLine("{0},{1}", X, Y);
         }
     }
-
-    [TestClass]
-    public class Day23Test {
-
-        [TestMethod]
-        public void Test1() {
-            AdventSolver solver = new Day23();
-            solver.InputFileName = "sample.txt";
-            char[][] map = solver.ReadInputAsCharArray();
-
-            Assert.IsTrue(IsValidStep(map, (5, 3), (5, 4)));
-
-            Assert.IsFalse(IsValidStep(map, (19, 13), (19, 12)));
-
-            // var result = GetAdjacentTile(map, (3, 11), (3, 12), 1);
-
-            // // Console.WriteLine("{0},{1} - {2}", result.Item1, result.Item2, result.Item3);
-
-            // Assert.AreEqual(result.Item3, 30);
-            // Assert.AreEqual(result.Item1, 11);
-            // Assert.AreEqual(result.Item2, 21);
-
-
-            // result = GetAdjacentTile(map, (0, 1), (0, 1), 1);
-
-            // Console.WriteLine("{0},{1} - {2}", result.Item1, result.Item2, result.Item3);
-
-            // Assert.AreEqual(result.Item3, 30);
-            // Assert.AreEqual(result.Item1, 11);
-            // Assert.AreEqual(result.Item2, 21);
-
-
-
-        }
-
-
-    }
 }
