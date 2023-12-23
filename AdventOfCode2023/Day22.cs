@@ -49,14 +49,7 @@ public class Day22 : AdventSolver {
         int count = 0;
 
         foreach(var brick in bricks) {
-            bool canDisentigrate = true;
-            foreach(var above in brick.Above) {
-                if(above.Below.Count() == 1) {
-                    canDisentigrate = false;
-                }
-            }
-
-            if(canDisentigrate) count++;
+            if(!brick.Above.Any(above => above.Below.Count() == 1)) count++;
         }
 
         return count;
